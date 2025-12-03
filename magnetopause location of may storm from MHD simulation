@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import datetime as dt
+
+file_path = "/home/parvathy/Desktop/PHD/mrittika.txt"
+
+data = np.loadtxt(file_path, usecols=(0, 1))
+
+minutes = data[:, 0]            
+col2 = data[:, 1]                
+
+start_time = dt.datetime(2024, 5, 10)
+times = [start_time + dt.timedelta(minutes=int(m)) for m in minutes]
+
+# Plot
+plt.figure(figsize=(10,5))
+plt.plot(times, col2, linewidth=2, color='blue')  # Thicker line
+
+# Labels with bold font
+plt.xlabel("Date / Time", fontweight='bold', fontsize=14)
+plt.ylabel("Position", fontweight='bold', fontsize=14)
+
+# Make tick labels bold and bigger
+plt.xticks(fontsize=12, fontweight='bold', color='black')
+plt.yticks(fontsize=12, fontweight='bold', color='black')
+
+plt.grid(True)
+
+# Set x-axis limits
+x_start = dt.datetime(2024, 5, 10)
+x_end   = dt.datetime(2024, 5, 13)
+plt.xlim(x_start, x_end)
+
+# Save figure
+plt.savefig("/home/parvathy/Desktop/PHD/col1_col2_time_plot.png",
+            dpi=300, bbox_inches='tight')
+
+plt.show()
+
